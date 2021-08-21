@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import {NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import Routes from './src/routes';
+
+const MyTheme = {
+  dark: false,
+  colors: {
+    primary: '#fff',
+    card: '#fc6500',
+    text: '#fff',
+    border: 'rgb(199, 199, 204)',
+  },
+};
+function App() {
+  return (
+    <NavigationContainer theme={MyTheme}>
+      <Routes />
+    </NavigationContainer>
+  );
+}
+/*import React from 'react';
+import Routes from './src/routes';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Routes />
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+}*/
+export default App;
