@@ -5,6 +5,19 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
+  menuButton:{
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0.2)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:100,
+    height:100,
+    backgroundColor:'#fff',
+    borderRadius:20
+  },
+  menuButtonInside:{
+    height:10
+  },
 
   navBar: {
     flexDirection: 'row',
@@ -77,6 +90,13 @@ export default StyleSheet.create({
   menuButtonsInside:{
     justifyContent:'center',
     alignItems: 'center',
+  },
+
+  menuButtonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 30
   },
 
   menuButtonsText: {

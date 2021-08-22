@@ -59,7 +59,7 @@ export default function Routes() {
   return (
     <>
       <AuthContext.Provider value={authContext}>
-        <RootStack.Navigator mode="modal">
+        <RootStack.Navigator>
           {state.userToken == null ? (
             <>
             <RootStack.Screen

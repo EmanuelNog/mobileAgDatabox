@@ -3,18 +3,19 @@ import * as React from 'react';
 import {NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import Routes from './src/routes';
 
+//rgb(199, 199, 204)
 const MyTheme = {
   dark: false,
   colors: {
     primary: '#fff',
-    card: '#fc6500',
+    card: 'rgb(16, 229, 165)',
     text: '#fff',
     border: 'rgb(199, 199, 204)',
   },
 };
 function App() {
   return (
-    <NavigationContainer theme={MyTheme}>
+    <NavigationContainer theme={DarkTheme}>
       <Routes />
     </NavigationContainer>
   );
