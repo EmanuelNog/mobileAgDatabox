@@ -20,17 +20,15 @@ export default function Menu(){
         }
     // async function onLogout(){
     //     await signOut();
-    //     navigateTo(Login);
         
-    // }
+    //  }
     /*
     
        */
     return (
     <Surface style = {{ flex: 1}}>
       <Appbar.Header>
-      <Appbar.BackAction 
-      //onPress={onLogout()} 
+      <Appbar.BackAction onPress={() => signOut()}
       />
       <Appbar.Content title="Title" subtitle="Subtitle" />
       <Appbar.Action icon="magnify"  />
@@ -40,7 +38,7 @@ export default function Menu(){
       <View style={styles.bodyContainer}> 
         <View style={styles.menuButtons}>
             <Button icon={() => <FontAwesome5 name='map-marked-alt' size={50} color="#0b980d"/>}
-            mode="outlined" onPress={() => console.log('Operacao')}
+            mode="outlined" onPress={() => signOut()} 
             style={styles.menuButton}
             //contentStyle={menuButtonsInside}
             >

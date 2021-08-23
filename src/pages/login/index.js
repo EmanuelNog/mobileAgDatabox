@@ -28,14 +28,12 @@ export default function Login(){
                 placeholder={"        Insira seu email"}
             />*/
     async function onLogin(textEmail,textPassword){
-      //await Authenticate(textEmail,textPassword).then(async resAuth=>{
-        //console.log(resAuth.data);
-        //await signIn({ token: resAuth.data });
-        //console.log(resAuth.data);
-      //}).catch(async e=>{
-        await signIn({ token: "resAuth.data" });
-        //console.log(e.response);
-      //})
+      await Authenticate(textEmail,textPassword).then(async resAuth=>{
+        console.log(resAuth.data);
+        await signIn({ token: resAuth.data.token });
+      }).catch(async e=>{
+        console.log(e.response);
+      })
     }
   return (
     <Surface style = {{ flex: 1,
