@@ -9,6 +9,7 @@ import {Authenticate} from '../../controller/autenticate';
 
 import styles from './styles';
 import api from '../../services/api';
+import Register from "../register";
 
 export default function Login(){
     const[email,setEmail] = useState("miranteazi2@gmail.com")
@@ -61,7 +62,7 @@ export default function Login(){
                       margin:15}}>
               Login
             </Button>
-            <Button mode="outlined" onPress={() => onLogin(email,password)}
+            <Button mode="outlined" onPress={() => navigateTo(Register)}
             style={{  width: "50%",
                       alignSelf:"center",
                       margin:5}}>

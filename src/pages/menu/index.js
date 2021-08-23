@@ -8,6 +8,7 @@ import AuthContext from '../../context/auth';
 
 import styles from './styles';
 //import api from '../../services/api';
+import Operation from '../operation';
 
 export default function Menu(){
 
@@ -30,8 +31,7 @@ export default function Menu(){
       <Appbar.Header>
       <Appbar.BackAction onPress={() => signOut()}
       />
-      <Appbar.Content title="Title" subtitle="Subtitle" />
-      <Appbar.Action icon="magnify"  />
+      <Appbar.Content title="Menu Principal" />
       <Appbar.Action icon="dots-vertical"  />
       </Appbar.Header>
 
@@ -50,7 +50,7 @@ export default function Menu(){
             >
             </Button>
             <Button icon={() => <FontAwesome5 name='tools' size={50} color="#0b980d"/>}
-            mode="outlined" onPress={() => console.log('Operacao')}
+            mode="outlined" onPress={() => navigateTo(Operation)}
             style={styles.menuButton}
             //contentStyle={menuButtonsInside}
             >
@@ -61,7 +61,13 @@ export default function Menu(){
             <Text style={styles.menuButtonsText}>safra</Text>
             <Text style={styles.menuButtonsText}>operacao</Text>
         </View>
-        <View style={styles.menuButtons}>
+        
+      </View>
+    </Surface>
+    )
+}
+/** 
+   <View style={styles.menuButtons}>
             <Button icon={() => <FontAwesome5 name='map-marked-alt' size={50} />}
             mode="outlined" onPress={() => console.log('Operacao')}
             style={styles.menuButton}
@@ -112,7 +118,4 @@ export default function Menu(){
             <Text style={styles.menuButtonsText}>nome2</Text>
             <Text style={styles.menuButtonsText}>nome3</Text>
         </View>
-      </View>
-    </Surface>
-    )
-}
+ */

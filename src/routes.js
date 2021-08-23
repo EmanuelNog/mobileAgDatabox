@@ -3,6 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Menu from './pages/menu';
 import Login from './pages/login';
+import Register from './pages/register';
+import Operation from './pages/operation';
+import newOperation from './pages/newOperation';
 import AuthContext from './context/auth'
 
 //EDITAR trocaRoutes pra Routes
@@ -66,13 +69,40 @@ export default function Routes() {
               name="Login"
               component={Login}
               options={{ headerShown: false }}
-            />       
+            />   
+            <RootStack.Screen
+              name="Register"
+              component={Register}
+              options={{ headerShown: false }}
+            />     
           </>
           ) : (
             <>
             <RootStack.Screen
             name="Home"
             component={Menu}
+            options={{
+              headerShown: false,
+              headerTintColor: '#fff',
+              headerStyle: {
+                backgroundColor: '#fc6500',
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="Operation"
+            component={Operation}
+            options={{
+              headerShown: false,
+              headerTintColor: '#fff',
+              headerStyle: {
+                backgroundColor: '#fc6500',
+              },
+            }}
+          />
+          <RootStack.Screen
+            name="newOperation"
+            component={newOperation}
             options={{
               headerShown: false,
               headerTintColor: '#fff',
