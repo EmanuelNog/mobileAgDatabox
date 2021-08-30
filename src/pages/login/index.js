@@ -12,25 +12,19 @@ import api from '../../services/api';
 import Register from "../register";
 
 export default function Login(){
-    const[email,setEmail] = useState("miranteazi2@gmail.com")
-    const[password,setPassword] = useState("emanuel12")
+    const[email,setEmail] = useState("")
+    const[password,setPassword] = useState("")
     const navigation = useNavigation();
     const { signIn } = React.useContext(AuthContext);
 
     function navigateTo(place, param = null) {
         navigation.navigate(place, { param });
     }
-    /* <View style={styles.bodyContainer}>
-    <TextInput
-                style={styles.insertionField}
-                onChangeText={onChangeEmail}
-                value={email}
-                placeholderStyle={styles.insertEmailField}
-                placeholder={"        Insira seu email"}
-            />*/
     async function onLogin(textEmail,textPassword){
+      // console.log("telalogin",textEmail)
+      // console.log(textPassword)
       await Authenticate(textEmail,textPassword).then(async resAuth=>{
-        console.log(resAuth.data);
+        console.log(resAuth);
         await signIn({ token: resAuth.data.token });
       }).catch(async e=>{
         console.log(e.response);
@@ -68,13 +62,23 @@ export default function Login(){
                       margin:5}}>
               Criar Conta
             </Button>
-            <Button mode="text" onPress={() => onLogin(email,password)}
-            style={{  width: "100%",
-                      alignSelf:"center",
-                      margin:15}}>
-              Esqueceu sua senha
-            </Button> 
+            
     </Surface>
   )
 }
 
+
+    /* <View style={styles.bodyContainer}>
+    <TextInput
+                style={styles.insertionField}
+                onChangeText={onChangeEmail}
+                value={email}
+                placeholderStyle={styles.insertEmailField}
+                placeholder={"        Insira seu email"}
+            />
+    <Button mode="text" onPress={() => onLogin(email,password)}
+            style={{  width: "100%",
+                      alignSelf:"center",
+                      margin:15}}>
+              Esqueceu sua senha
+            </Button> */

@@ -11,9 +11,9 @@ import styles from './styles';
 import api from '../../services/api';
 
 export default function Register(){
-    const[nome,setNome] = useState("")
-    const[phone,setPhone] = useState("")
+    const[name,setName] = useState("")
     const[email,setEmail] = useState("")
+    const[username,setUsername] = useState("")
     const[password,setPassword] = useState("")
     const navigation = useNavigation();
     const { signIn } = React.useContext(AuthContext);
@@ -22,13 +22,17 @@ export default function Register(){
         navigation.navigate(place, { param });
     }
 
-    async function onLogin(textEmail,textPassword){
-      await Authenticate(textEmail,textPassword).then(async resAuth=>{
-        console.log(resAuth.data);
-        await signIn({ token: resAuth.data.token });
-      }).catch(async e=>{
-        console.log(e.response);
-      })
+    async function onRegister(textName,textEmail,textUsername,textPassword){
+      var userObj =  new Object();
+      userObj.name = textName;
+      userObj.email = textEmail;
+      userObj.username = textUsername;
+      userObj.password = textPassword;
+      //console.log(userObj);
+      const response = await api.post('user',{name:textName, email:textEmail, username:textUsername, 
+                                              password:textPassword, isAdmin:true, authType:"d"});
+      //console.log(response.data);
+      navigation.goBack();
     }
   return (
     <Surface style = { styles.container}>
@@ -37,15 +41,15 @@ export default function Register(){
             <TextInput
                 mode = "outlined"
                 label="Nome"
-                value={nome}
-                onChangeText={setNome}
+                value={name}
+                onChangeText={setName}
                 style ={{margin: 10}}
             />
             <TextInput
                 mode ="outlined"
-                label="Telefone"
-                value={phone}
-                onChangeText={setPhone}
+                label="Nome de Usuario"
+                value={username}
+                onChangeText={setUsername}
                 style ={{margin: 10}}
             />
             <TextInput
@@ -69,7 +73,7 @@ export default function Register(){
                           margin:15}}>
                   Cancelar
                 </Button>
-                <Button mode="contained" 
+                <Button mode="contained" onPress={() => onRegister(name,email,username,password)}
                 style={{  width: "40%",
                           alignSelf:"center",
                           margin:15}}>

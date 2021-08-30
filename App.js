@@ -15,7 +15,7 @@ const MyTheme = {
 };
 function App() {
   return (
-    <NavigationContainer theme={DarkTheme}>
+    <NavigationContainer theme={MyTheme}>
       <Routes />
     </NavigationContainer>
   );

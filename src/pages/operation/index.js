@@ -1,7 +1,7 @@
 import React, {Component, useState} from "react";
 import {View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { TextInput, Surface, Button, Appbar } from 'react-native-paper';
+import { TextInput, Surface, Button, Appbar, Searchbar } from 'react-native-paper';
 import AuthContext from '../../context/auth';
 import {Authenticate} from '../../controller/autenticate';
 //import { configSurface } from '../globalStyle';
@@ -16,11 +16,17 @@ export default function Operation(){
     const[initDate,setInitDate] = useState("")
     const[finishDate,setFinishDate] = useState("")
     const[password,setPassword] = useState("")
+    const[listArea,setListArea] = useState([])
 
     const navigation = useNavigation();
 
     function navigateTo(place, param = null) {
         navigation.navigate(place, { param });
+    }
+
+    async function getAreas(){
+       await api.get('/area').then(r=> setListArea(r.data)).catch();
+       console.log(setListArea)
     }
 
   return (
@@ -47,7 +53,21 @@ export default function Operation(){
                     onChangeText={setArea}
                     style ={{margin: 10}}
                 />
-                <TextInput
+                <Button mode="outlined" onPress={() => getAreas()}
+                      style={{  width: "40%",
+                              alignSelf:"center",
+                              margin:15}}>
+                      Listar Areas
+                </Button>
+                
+                
+          </View>
+            
+    </Surface>
+  )
+}
+/*
+<TextInput
                     mode ="outlined"
                     label="Data de Início"
                     value={initDate}
@@ -61,18 +81,4 @@ export default function Operation(){
                     onChangeText={setFinishDate}
                     style ={{margin: 10}}
                 />
-                
-                <View style={styles.rowOrientation}>
-                    <Button mode="outlined" onPress={() => navigation.goBack()}
-                      style={{  width: "40%",
-                              alignSelf:"center",
-                              margin:15}}>
-                      Procurar
-                    </Button>
-                </View>
-          </View>
-            
-    </Surface>
-  )
-}
-
+*/
