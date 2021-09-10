@@ -12,8 +12,8 @@ import api from '../../services/api';
 import Register from "../register";
 
 export default function Login(){
-    const[email,setEmail] = useState("")
-    const[password,setPassword] = useState("")
+    const[username,setUsername] = useState("cc")
+    const[password,setPassword] = useState("123")
     const navigation = useNavigation();
     const { signIn } = React.useContext(AuthContext);
 
@@ -38,19 +38,19 @@ export default function Login(){
             <Text style={styles.titleImage}>AgDatabox</Text>
             <TextInput
                 mode = "outlined"
-                label="email"
-                value={email}
-                onChangeText={setEmail}
+                label="Nome de Usuario"
+                value={username}
+                onChangeText={setUsername}
                 style ={{margin: 10}}
             />
             <TextInput
                 mode = "outlined"
-                label="password"
+                label="Senha"
                 value={password}
                 onChangeText={setPassword}
                 style ={{margin: 10}}
             />
-            <Button mode="contained" onPress={() => onLogin(email,password)}
+            <Button mode="contained" onPress={() => onLogin(username,password)}
             style={{  width: "50%",
                       alignSelf:"center",
                       margin:15}}>

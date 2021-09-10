@@ -1,10 +1,10 @@
 import api from '../services/api';
 import {getToken} from './getToken.js'
 
-export async function Authenticate(email, password) {
-  console.log(email,password)
+export async function Authenticate(username, password) {
+  console.log(username,password)
     return await api.post('/auth/', {
-      username: email,
+      username: username,
       password: password,
     })
 }

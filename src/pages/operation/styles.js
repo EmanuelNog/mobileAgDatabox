@@ -6,8 +6,15 @@ export default StyleSheet.create({
     flex: 1
   },
   bodyContainer:{
-    paddingHorizontal:10,
-    paddingTop: 20,
+    paddingHorizontal:20,
+    paddingTop: 20
+  },
+  basicSpacing:{
+    margin: 10
+  },
+  alignAndJustify:{
+    alignSelf:"center",
+    justifyContent: "center"
   },
   titleImage: {
     color: "#121212",

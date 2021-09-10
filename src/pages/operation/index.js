@@ -1,10 +1,9 @@
 import React, {Component, useState} from "react";
 import {View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { TextInput, Surface, Button, Appbar, Searchbar } from 'react-native-paper';
-import AuthContext from '../../context/auth';
-import {Authenticate} from '../../controller/autenticate';
-//import { configSurface } from '../globalStyle';
+import { Surface, Button, Appbar, 
+        List, Portal, Dialog } from 'react-native-paper';
+
 
 
 import styles from './styles';
@@ -15,19 +14,31 @@ export default function Operation(){
     const[area,setArea] = useState("")
     const[initDate,setInitDate] = useState("")
     const[finishDate,setFinishDate] = useState("")
-    const[password,setPassword] = useState("")
     const[listArea,setListArea] = useState([])
+    //const[showAreas,setShowAreas] = useState(showAreas ? true : false);
 
     const navigation = useNavigation();
+
+    const Areas =   [{key: '1', label: 'Sitio'},
+                     {key: '2', label: 'Chacara'}
+                    ];
+    function onChooseArea(chooseArea){
+        setArea(chooseArea);
+        setShowAreas(false);
+    }
 
     function navigateTo(place, param = null) {
         navigation.navigate(place, { param });
     }
 
     async function getAreas(){
-       await api.get('/area').then(r=> setListArea(r.data)).catch();
+       await api.get('area/todas').then(r=> setListArea(r.data)).catch();
        console.log(setListArea)
     }
+
+    // UseEffect(()=>{
+
+    // },[])
 
   return (
     <Surface style = {styles.container}>
@@ -39,30 +50,58 @@ export default function Operation(){
             </Appbar.Header>
             <View style={styles.bodyContainer}>
                 <Button icon="plus" mode="outlined" onPress={() => navigateTo(newOperation)}
-                      style={{  width: "95%",
-                              height: "10%",
-                              alignSelf:"center",
-                              justifyContent: "center",
-                              margin: 10}}>
-                      Nova Operacao
+                    style={[{width: "100%",
+                            padding:10},
+                            styles.alignAndJustify]}>
+                    Nova Operacao
                 </Button>
-                <TextInput
-                    mode = "outlined"
-                    label="Selecionar área"
-                    value={area}
-                    onChangeText={setArea}
-                    style ={{margin: 10}}
-                />
-                <Button mode="outlined" onPress={() => getAreas()}
-                      style={{  width: "40%",
-                              alignSelf:"center",
-                              margin:15}}>
+                <Text> </Text>
+
+                <TouchableOpacity
+                    activeOpacity={1}
+                    //</View>onPress={()=>setShowAreas(true)}
+                >
+                    <Text>
+                        {area ? area:"selecione a area"}
+                    </Text>
+                </TouchableOpacity>
+
+                <Portal>
+                    <Dialog
+                    visible = {showAreas}
+                    //onDismiss = {()=>setShowAreas(false)}
+                    >
+                        <Dialog.Title> 
+                            Selecione a Area 
+                        </Dialog.Title>
+                        <Dialog.Content>
+                            {Areas.map(data=>{
+                                return (
+                                    <List.Item
+                                        key={data.key}
+                                        title={data.label}
+                                        onPress={ onChooseArea(data)}
+                                    />
+                                );
+                            })}
+                        </Dialog.Content>
+                        <Dialog.Actions>
+                            <Button 
+                            //    onPress = {()=>setShowAreas(false)}
+                            > 
+                                Voltar
+                            </Button>
+                        </Dialog.Actions>
+                    </Dialog>
+                </Portal>
+
+                {/* <Button mode="outlined" onPress={() => getAreas()}
+                      style={[{  width: "50%",
+                              margin:15},
+                              styles.alignAndJustify]}>
                       Listar Areas
-                </Button>
-                
-                
+                </Button> */}
           </View>
-            
     </Surface>
   )
 }
