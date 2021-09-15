@@ -2,7 +2,7 @@ import React, {Component, useState} from "react";
 import {View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { Surface, Button, Appbar, 
-        List, Portal, Dialog } from 'react-native-paper';
+        List, Portal, Dialog, Provider as PaperProvider } from 'react-native-paper';
 
 
 
@@ -16,16 +16,22 @@ export default function Operation(){
     const[finishDate,setFinishDate] = useState("")
     const[listArea,setListArea] = useState([])
     //const[showAreas,setShowAreas] = useState(showAreas ? true : false);
+    const[areaVisible,setAreavisible] = useState(false);
+
+    const areaVisibleShow = () => setAreavisible(true);
+    
+    const areaVisibleHide = () => setAreavisible(false);
+
+    function chooseArea(areaText){
+        areaVisibleHide;
+        setArea(areaText);
+    }
 
     const navigation = useNavigation();
 
     const Areas =   [{key: '1', label: 'Sitio'},
                      {key: '2', label: 'Chacara'}
                     ];
-    function onChooseArea(chooseArea){
-        setArea(chooseArea);
-        setShowAreas(false);
-    }
 
     function navigateTo(place, param = null) {
         navigation.navigate(place, { param });
@@ -41,6 +47,7 @@ export default function Operation(){
     // },[])
 
   return (
+    <PaperProvider>
     <Surface style = {styles.container}>
             <Appbar.Header>
             <Appbar.BackAction onPress={() => navigation.goBack()}
@@ -57,19 +64,21 @@ export default function Operation(){
                 </Button>
                 <Text> </Text>
 
-                <TouchableOpacity
+                <Button
                     activeOpacity={1}
-                    //</View>onPress={()=>setShowAreas(true)}
+                    onPress={areaVisibleShow}
                 >
                     <Text>
-                        {area ? area:"selecione a area"}
+                        {/* {area ? area:"selecione a area"} */}
+                        botao de selecionar area
                     </Text>
-                </TouchableOpacity>
+                </Button>
 
+                
                 <Portal>
                     <Dialog
-                    visible = {showAreas}
-                    //onDismiss = {()=>setShowAreas(false)}
+                    visible = {areaVisible}
+                    onDismiss = {areaVisibleHide}
                     >
                         <Dialog.Title> 
                             Selecione a Area 
@@ -80,20 +89,21 @@ export default function Operation(){
                                     <List.Item
                                         key={data.key}
                                         title={data.label}
-                                        onPress={ onChooseArea(data)}
+                                        onPress={ chooseArea(data)}
                                     />
                                 );
                             })}
                         </Dialog.Content>
                         <Dialog.Actions>
                             <Button 
-                            //    onPress = {()=>setShowAreas(false)}
+                                onPress = {areaVisibleHide}
                             > 
                                 Voltar
                             </Button>
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
+                
 
                 {/* <Button mode="outlined" onPress={() => getAreas()}
                       style={[{  width: "50%",
@@ -103,6 +113,7 @@ export default function Operation(){
                 </Button> */}
           </View>
     </Surface>
+    </PaperProvider>
   )
 }
 /*

@@ -13,8 +13,10 @@ import api from '../../services/api';
 export default function Register(){
     const[name,setName] = useState("")
     const[email,setEmail] = useState("")
+    const[phone,setPhone] = useState("")
     const[username,setUsername] = useState("")
     const[password,setPassword] = useState("")
+    const[confpassword,setConfPassword] = useState("")
     const navigation = useNavigation();
     const { signIn } = React.useContext(AuthContext);
 
@@ -22,16 +24,17 @@ export default function Register(){
         navigation.navigate(place, { param });
     }
 
-    async function onRegister(textName,textEmail,textUsername,textPassword){
+    async function onRegister(textName,textEmail,textPhone,textUsername,textPassword){
       var userObj =  new Object();
       userObj.name = textName;
-      userObj.email = textEmail;
+      userObj.mail = textEmail;
+      userObj.phone = textPhone;
       userObj.username = textUsername;
       userObj.password = textPassword;
       //console.log(userObj);
-      const response = await api.post('user',{name:textName, email:textEmail, username:textUsername, 
+      const response = await api.post('user',{name:textName, mail:textEmail, phone:textPhone, username:textUsername, 
                                               password:textPassword, isAdmin:true, authType:"d"});
-      //console.log(response.data);
+      console.log(response.data);
       navigation.goBack();
     }
   return (
@@ -61,9 +64,23 @@ export default function Register(){
             />
             <TextInput
                 mode ="outlined"
+                label="Telefone"
+                value={phone}
+                onChangeText={setPhone}
+                style ={{margin: 10}}
+            />
+            <TextInput
+                mode ="outlined"
                 label="Senha"
                 value={password}
                 onChangeText={setPassword}
+                style ={{margin: 10}}
+            />
+            <TextInput
+                mode ="outlined"
+                label="Confirmar Senha"
+                value={confpassword}
+                onChangeText={setConfPassword}
                 style ={{margin: 10}}
             />
             <View style={styles.rowOrientation}>
@@ -73,7 +90,7 @@ export default function Register(){
                           margin:15}}>
                   Cancelar
                 </Button>
-                <Button mode="contained" onPress={() => onRegister(name,email,username,password)}
+                <Button mode="contained" onPress={() => onRegister(name,email,phone,username,password)}
                 style={{  width: "40%",
                           alignSelf:"center",
                           margin:15}}>

@@ -10,7 +10,7 @@ const theme = {
     ...DefaultTheme.colors,
     surface:'#f2f2f2',
     //text: '#505050',
-    primary: '#fc6500',
+    primary: '#bc2f2f',
     accent: '#000',
   },
 };
