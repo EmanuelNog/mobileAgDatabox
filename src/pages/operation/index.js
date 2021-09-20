@@ -22,8 +22,8 @@ export default function Operation(){
     
     const areaVisibleHide = () => setAreavisible(false);
 
-    function chooseArea(areaText){
-        areaVisibleHide;
+    const chooseArea = (areaText) => {
+        areaVisibleHide();
         setArea(areaText);
     }
 
@@ -69,8 +69,7 @@ export default function Operation(){
                     onPress={areaVisibleShow}
                 >
                     <Text>
-                        {/* {area ? area:"selecione a area"} */}
-                        botao de selecionar area
+                        {area ? area:"selecione a area"}
                     </Text>
                 </Button>
 
@@ -89,7 +88,7 @@ export default function Operation(){
                                     <List.Item
                                         key={data.key}
                                         title={data.label}
-                                        onPress={ chooseArea(data)}
+                                        onPress={ ()=> chooseArea(data.label)}
                                     />
                                 );
                             })}
